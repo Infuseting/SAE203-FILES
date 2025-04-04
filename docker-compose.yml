@@ -13,9 +13,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./sql/create.sql:/docker-entrypoint-initdb.d/create.sql
-      - ./sql/insert.sql:/docker-entrypoint-initdb.d/insert.sql
-      - ./sql/vue.sql:/docker-entrypoint-initdb.d/vue.sql
+      - ./sql/01_create.sql:/docker-entrypoint-initdb.d/01_create.sql
+      - ./sql/02_insert.sql:/docker-entrypoint-initdb.d/02_insert.sql
+      - ./sql/03_vue.sql:/docker-entrypoint-initdb.d/03_vue.sql
 
   apache:
     image: php:8.0-apache
@@ -29,11 +29,15 @@ services:
       - external_network
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: improvz
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     command: >
-      bash -c "echo '<Directory /var/www/html>
-      Options -Indexes
-      </Directory>' > /etc/apache2/conf-enabled/disable-indexes.conf &&
-      apache2-foreground"
+      sh -c "apt-get update &&
+             apt-get install -y libmariadb-dev &&
+             docker-php-ext-install mysqli &&
+             apache2-foreground"
 
   sftp:
     image: atmoz/sftp:latest
