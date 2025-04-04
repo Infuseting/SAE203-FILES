@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: improvz
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./sql/insert.sql:/docker-entrypoint-initdb.d/insert.sql
+      - ./sql/vue.sql:/docker-entrypoint-initdb.d/vue.sql
+
+  apache:
+    image: httpd:latest
+    container_name: apache_server
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./web:/usr/local/apache2/htdocs/
+    networks:
+      - external_network
+
+  sftp:
+    image: atmoz/sftp:latest
+    container_name: sftp_server
+    restart: always
+    ports:
+      - "22:22"
+    volumes:
+      - ./sftp:/home/user/upload
+    environment:
+      SFTP_USERS: "user:password:1001"
+    depends_on:
+      - mysql
+      - apache
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    driver: bridge
