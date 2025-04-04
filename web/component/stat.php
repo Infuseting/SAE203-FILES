@@ -19,7 +19,7 @@ $conn = getConn();
                     </svg>
 
                     <h2 class="title-font font-medium text-3xl text-gray-900"><?php
-                        $SQL = "SELECT COUNT(*) FROM imp_client";
+                        $SQL = "SELECT COUNT(*) FROM IMP_Client";
                         $result = $conn->query($SQL);
                         $row = $result->fetch_row();
                         echo $row[0];
@@ -35,7 +35,7 @@ $conn = getConn();
                         <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
                     </svg>
                     <h2 class="title-font font-medium text-3xl text-gray-900"><?php
-                        $SQL = "SELECT COUNT(*) FROM imp_commande";
+                        $SQL = "SELECT COUNT(*) FROM IMP_Commande";
                         $result = $conn->query($SQL);
                         $row = $result->fetch_row();
                         echo $row[0];
@@ -50,7 +50,7 @@ $conn = getConn();
                     <svg xmlns="http://www.w3.org/2000/svg"   fill="currentColor" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 -960 960 960" ><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
 
                     <h2 class="title-font font-medium text-3xl text-gray-900"><?php
-                        $SQL = "SELECT ROUND(AVG(AVI_Note),1) FROM imp_avis";
+                        $SQL = "SELECT ROUND(AVG(AVI_Note),1) FROM IMP_Avis";
                         $result = $conn->query($SQL);
                         $row = $result->fetch_row();
                         echo $row[0];

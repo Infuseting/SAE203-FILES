@@ -7,8 +7,8 @@
              data-aos-easing="linear"
              data-aos-duration="500">
             <div class="px-5 flex justify-center flex-col h-full">
-                <h1 class="text-6xl font-bold mb-4">Improvz - Improve your shop</h1>
-                <p class="text-2xl">Improvz est un service d'accompagnement et de digitalisation de votre activité par le biais de plusieurs services, comme des cartes de visite 100% modifiables en différents matériaux, des sites internet, ou bien une gestion approfondie de votre relation client.</p>
+                <h1 class="text-6xl font-bold mb-4">Improovz - Improve your shop</h1>
+                <p class="text-2xl">Improovz est un service d'accompagnement et de digitalisation de votre activité par le biais de plusieurs services, comme des cartes de visite 100% modifiables en différents matériaux, des sites internet, ou bien une gestion approfondie de votre relation client.</p>
             </div>
         </div>
     </div>

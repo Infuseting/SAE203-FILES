@@ -60,7 +60,7 @@ $conn = getConn();
                 </div> -->
                 <?php
 
-                    $SQL = "SELECT * FROM imp_avis JOIN imp_commande using (COM_ID) JOIN imp_client USING (CLI_ID) ORDER BY RAND() LIMIT 20";
+                    $SQL = "SELECT * FROM IMP_Avis JOIN IMP_Commande using (COM_ID) JOIN IMP_Client USING (CLI_ID) ORDER BY RAND() LIMIT 20";
                     $result = $conn->query($SQL);
                     while ($row  = $result->fetch_assoc()) {
                         echo '<div class="h-40 swiper-slide group bg-white border border-solid border-gray-300 rounded-2xl p-6 transition-all duration-500 w-full ">

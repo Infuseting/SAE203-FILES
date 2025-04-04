@@ -14,6 +14,8 @@ services:
       - "3306:3306"
     volumes:
       - ./sql/01_create.sql:/docker-entrypoint-initdb.d/01_create.sql
+    networks:
+      - external_network
 
   apache:
     image: php:8.0-apache
@@ -27,7 +29,7 @@ services:
       - external_network
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
-      MYSQL_HOST: mysql
+      MYSQL_HOST: mysql_server
       MYSQL_DATABASE: improvz
       MYSQL_USER: user
       MYSQL_PASSWORD: password
@@ -44,7 +46,7 @@ services:
     ports:
       - "22:22"
     volumes:
-      - ./sftp:/home/user/upload
+      - ./web:/home/user/web
     environment:
       SFTP_USERS: "user:password:1001"
     depends_on:

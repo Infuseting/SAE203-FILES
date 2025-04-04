@@ -1,10 +1,6 @@
 <?php
 include __DIR__ . '/../config.php';
-function route($path) {
-    $path = preg_replace('/[?#].*/', '', $path);
-    $path = preg_replace('/https?:\/\/[^\/]+/', '', $path);
-    return $path;
-}
+$uuid = $_GET['id'];
 
 function buildCard($vPrefix, $vFirstName, $vLastName, $vCompanyName, $vJobTitle, $vWebsite, $vEmail, $vPhone, $vNotes, $vSuffix, $vImgBase64)
 {
@@ -25,16 +21,18 @@ function buildCard($vPrefix, $vFirstName, $vLastName, $vCompanyName, $vJobTitle,
 
 $conn = getConn();
 
-$router = str_replace('/carte/', '', route($_SERVER['REQUEST_URI']));
 
-$SQL = "SELECT * FROM imp_carte WHERE CAR_ID = '$router'";
+$SQL = "SELECT * FROM IMP_Carte WHERE CAR_ID = '$uuid'";
 $results = $conn->query($SQL);
 $result = $results->fetch_assoc();
 
-
-
-header('Content-Type: text/vcard');
-header('Content-Disposition: attachment; filename="contact.vcf"');
-echo buildCard($result['CAR_PREFIX'], $result['CAR_PRENOM'], $result['CAR_NOM'], $result['CAR_COMPANY_NAME'], $result['CAR_POSTE'], $result['CAR_WEBSITE'], $result['CAR_MAIL'], $result['CAR_PHONE'], $result['CAR_NOTES'], $result['CAR_SUFFIX'], $result['CAR_IMAGE']);
-
+if ($result) {
+    header('Content-Type: text/vcard');
+    header('Content-Disposition: attachment; filename="Contact'.$result['CAR_PRENOM'].$result['CAR_NOM'].'.vcf"');
+    echo buildCard($result['CAR_PREFIX'], $result['CAR_PRENOM'], $result['CAR_NOM'], $result['CAR_COMPANY_NAME'], $result['CAR_POSTE'], $result['CAR_WEBSITE'], $result['CAR_MAIL'], $result['CAR_PHONE'], $result['CAR_NOTES'], $result['CAR_SUFFIX'], $result['CAR_IMAGE']);
+}
+else {
+    Header('Location: /');
+    exit();
+}
 
