@@ -18,7 +18,9 @@ services:
       - external_network
 
   apache:
-    image: php:8.0-apache
+    apache:
+    build:
+      context: .
     container_name: apache_server
     restart: always
     ports:
@@ -33,11 +35,6 @@ services:
       MYSQL_DATABASE: improvz
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    command: >
-      sh -c "apt-get update &&
-             apt-get install -y libmariadb-dev &&
-             docker-php-ext-install mysqli &&
-             apache2-foreground"
 
   sftp:
     image: atmoz/sftp:latest
