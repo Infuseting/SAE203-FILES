@@ -14,8 +14,6 @@ services:
       - "3306:3306"
     volumes:
       - ./sql/01_create.sql:/docker-entrypoint-initdb.d/01_create.sql
-      - ./sql/02_insert.sql:/docker-entrypoint-initdb.d/02_insert.sql
-      - ./sql/03_vue.sql:/docker-entrypoint-initdb.d/03_vue.sql
 
   apache:
     image: php:8.0-apache
