@@ -18,7 +18,6 @@ services:
       - external_network
 
   apache:
-    apache:
     build:
       context: .
     container_name: apache_server
